@@ -1,0 +1,55 @@
+#+title: A minimal knitr example in Rnw
+#+AUTHOR:    Charles Berry, Alexander Jerneck
+#+EMAIL:     ccberry@ucsd.edu, ajerneck@sas.upenn.edu
+#+DATE:      2013-07-20
+
+* What is Up
+
+A minimal Rnw example.
+
+* A minimal knitr example in HTML
+
+#+ATTR_R-HEADERS: :comments  :shebang  :cache no :padline  :noweb no :tangle no :exports code :results replace :padnewline yes :hlines no :session none
+#+BEGIN_SRC R 
+opts_chunk$set(fig.width=5, fig.height=5, fig.path='ex-out-')
+#+END_SRC
+
+This is a minimal example which shows *knitr*
+  working with Rnw.
+
+Boring stuff as usual:
+
+#+ATTR_R-HEADERS: :comments  :shebang  :cache no :padline  :noweb no :tangle no :exports code :results replace :padnewline yes :hlines no :session none
+#+BEGIN_SRC R 
+## a simple calculator
+1+1
+## boring random numbers
+set.seed(123)
+rnorm(5)
+#+END_SRC
+
+We can also produce plots (centered by the
+  option ~fig.align~=~'center'~):
+
+#+ATTR_RAVEL: html-cars-scatter, message=FALSE, fig.align='center'
+#+ATTR_R-HEADERS: :comments  :shebang  :cache no :padline  :noweb no :tangle no :exports code :results replace :padnewline yes :hlines no :session none
+#+BEGIN_SRC R 
+library(ggplot2)
+plot(mpg~hp, mtcars)
+qplot(hp, mpg, data=mtcars)+geom_smooth()
+#+END_SRC
+
+
+Errors, messages and warnings can be put into ~div~'s
+  with different ~class~ es:
+
+#+ATTR_R-HEADERS: :comments  :shebang  :cache no :padline  :noweb no :tangle no :exports code :results replace :padnewline yes :hlines no :session none
+#+BEGIN_SRC R 
+sqrt(-1)  # warning
+message('knitr says hello to HTML!')
+1+'a'  # mission impossible
+#+END_SRC
+
+
+  Well, everything seems to be working. Let's ask R what is the
+  value of \pi? Of course it is src_R{pi}.
