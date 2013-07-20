@@ -3,6 +3,8 @@
 #+EMAIL:     ccberry@ucsd.edu, ajerneck@sas.upenn.edu
 #+DATE:      2013-07-20
 
+#+PROPERTY: :session *R*
+
 * What is Up
 
 A minimal Rnw example.
@@ -11,8 +13,11 @@ A minimal Rnw example.
 
 #+ATTR_R-HEADERS: :comments  :shebang  :cache no :padline  :noweb no :tangle no :exports code :results replace :padnewline yes :hlines no :session none
 #+BEGIN_SRC R 
-opts_chunk$set(fig.width=5, fig.height=5, fig.path='ex-out-')
+  library(knitr)
+  opts_chunk$set(fig.width=5, fig.height=5, fig.path='ex-out-')
 #+END_SRC
+
+#+RESULTS:
 
 This is a minimal example which shows *knitr*
   working with Rnw.
@@ -53,3 +58,10 @@ message('knitr says hello to HTML!')
 
   Well, everything seems to be working. Let's ask R what is the
   value of \pi? Of course it is src_R{pi}.
+
+
+#+begin_src R
+
+lsos()
+
+#+END_SRC

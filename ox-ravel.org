@@ -523,18 +523,22 @@ This backend produces an Sweave noweb style document.
   
 #+name: latex-Rnw-dispatcher
 #+BEGIN_SRC emacs-lisp :tangle ox-ravel.el :results silent
-  (defun org-ravel-latex-noweb-dispatch 
-    (&optional async subtreep visible-only body-only ext-plist)
-  "Execute menu selection. See org-export.el for meaning of ASYNC,
-        SUBTREEP, VISIBLE-ONLY and BODY-ONLY."
-  (interactive)
-  (if async
-      (message "No async allowed.")
-    (let
-        ((outfile  (org-export-output-file-name ".Rnw" subtreep)))
-         (org-export-to-file 'latex-noweb 
-                             outfile subtreep visible-only 
-                             body-only ext-plist))))
+    (defun org-ravel-latex-noweb-dispatch 
+      (&optional async subtreep visible-only body-only ext-plist)
+    "Execute menu selection. See org-export.el for meaning of ASYNC,
+          SUBTREEP, VISIBLE-ONLY and BODY-ONLY."
+    (interactive)
+    (if async
+        (message "No async allowed.")
+      (let
+          ((outfile  (org-export-output-file-name ".Rnw" subtreep)))
+           (org-export-to-file 'latex-noweb 
+                               outfile subtreep visible-only 
+                               body-only ext-plist)
+           (message (format "compiling %s to pdf using knit2pdf..." outfile))
+           (message "Remember 1) #+PROPERTY: :session *R* 2) ess-switch-process 3) library(knitr)if you get errors.")
+           (ess-execute (format "knit2pdf('%s')" outfile))  
+           )))
 #+END_SRC
     
     
